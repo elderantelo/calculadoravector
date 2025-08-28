@@ -206,3 +206,11 @@ class VectorCalcApp(tk.Tk):
 if __name__ == "__main__":
     app = VectorCalcApp()
     app.mainloop()
+    - name: Build .exe with PyInstaller
+      run: pyinstaller --onefile tuarchivo.py
+
+    - name: Upload artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: vector_calculadora
+        path: dist/*.exe
