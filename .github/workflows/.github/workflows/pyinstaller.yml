@@ -26,3 +26,11 @@ jobs:
       with:
         name: vector_calculator
         path: dist/vector_calculator_gui_with_angle.exe
+    - name: Build .exe with PyInstaller
+      run: pyinstaller --onefile tuarchivo.py
+
+    - name: Upload artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: vector_calculadora
+        path: dist/*.exe
