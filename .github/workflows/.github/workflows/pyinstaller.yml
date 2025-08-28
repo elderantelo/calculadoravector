@@ -1,0 +1,28 @@
+name: Build EXE with PyInstaller
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: 3.11
+
+    - name: Install dependencies
+      run: |
+        pip install pyinstaller matplotlib
+
+    - name: Build .exe with PyInstaller
+      run: |
+        pyinstaller --noconfirm --onefile --windowed vector_calculator_gui_with_angle.py
+
+    - name: Upload EXE
+      uses: actions/upload-artifact@v3
+      with:
+        name: vector_calculator
+        path: dist/vector_calculator_gui_with_angle.exe
