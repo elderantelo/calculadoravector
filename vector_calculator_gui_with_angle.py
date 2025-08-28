@@ -202,15 +202,3 @@ class VectorCalcApp(tk.Tk):
         self.output.delete("1.0", "end")
         self.output.insert("end", text)
         self.output.configure(state="disabled")
-
-if __name__ == "__main__":
-    app = VectorCalcApp()
-    app.mainloop()
-    - name: Build .exe with PyInstaller
-      run: pyinstaller --onefile tuarchivo.py
-
-    - name: Upload artifact
-      uses: actions/upload-artifact@v4
-      with:
-        name: vector_calculadora
-        path: dist/*.exe
