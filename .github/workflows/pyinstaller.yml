@@ -6,23 +6,26 @@ on:
 jobs:
   build:
     runs-on: windows-latest
+
     steps:
-      - uses: actions/checkout@v3
+    - name: Checkout repo
+      uses: actions/checkout@v4
 
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: 3.11
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.11'
 
-      - name: Install dependencies
-        run: |
-          pip install pyinstaller matplotlib
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install pyinstaller
 
-      - name: Build .exe with PyInstaller
-        run: pyinstaller --onefile tuarchivo.py
+    - name: Build with PyInstaller
+      run: pyinstaller --noconfirm --onefile --windowed vector_calculator_gui_with_angle.py
 
-      - name: Upload artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: vector_calculadora
-          path: dist/*.exe
+    - name: Upload artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: vector_calculadora
+        path: dist/*.exe
